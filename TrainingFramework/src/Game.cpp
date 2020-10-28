@@ -10,6 +10,19 @@
 #include "Models.h"
 #include "Font.h"
 
+#include "ShaderManager.h"
+#include "TextureManager.h"
+
+ShaderManager* GetShaderManager()
+{
+	return ShaderManager::GetInstance();
+}
+
+TextureManager* GetTextureManager()
+{
+	return TextureManager::GetInstance();
+}
+
 int screenWidth = 480;
 int screenHeight = 800;
 
@@ -39,34 +52,48 @@ GLint Init(ESContext* esContext)
 	m_ModelsPath = dataPath + "Model\\";
 	m_FontPath = dataPath + "fonts\\";
 
+	// Shader Manager
+	GetShaderManager()->setPath(m_ShaderPath);
+	GetShaderManager()->addShader("TextureShader.vs", "TextureShader.fs");
+	GetShaderManager()->addShader("TextShader.vs", "TextShader.fs");
+
+	// Texture Manager
+	GetTextureManager()->setPath(m_TexturePath);
+	GetTextureManager()->addTexture("bg_main_menu.tga");
+	GetTextureManager()->addTexture("button_play.tga");
+	GetTextureManager()->addTexture("button_quit.tga");
+
 	//model
 	std::string path = m_ModelsPath + "Sprite2D.nfg";
 	std::shared_ptr<Models> model = std::make_shared<Models>(path, NFG);
 
 	//texture
-	std::shared_ptr<Texture> texture1 = std::make_shared<Texture>();
+	/*std::shared_ptr<Texture> texture1 = std::make_shared<Texture>();
 	std::string file = m_TexturePath + "bg_main_menu.tga";
-	texture1->Init(file.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	texture1->Init(file.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);*/
 
 	//shader
-	std::shared_ptr<Shaders>  shader;
+	/*std::shared_ptr<Shaders>  shader;
 	shader = std::make_shared<Shaders>();
 	std::string vs = m_ShaderPath + "TextureShader.vs";
 	std::string fs = m_ShaderPath + "TextureShader.fs";
-	shader->Init(vs, fs);
+	shader->Init(vs, fs);*/
 
 	//game object
 	//BackGround
-	m_BackGround = std::make_shared<Sprite2D>(model, shader, texture1);
+	auto shader = GetShaderManager()->getShader(0);
+	auto texture = GetTextureManager()->getTexture(0);
+	m_BackGround = std::make_shared<Sprite2D>(model, shader, texture);
 	m_BackGround->Set2DPosition(screenWidth / 2, screenHeight / 2);
 	m_BackGround->SetSize(screenWidth, screenHeight);
 
 	//play button
 	//texture
-	std::shared_ptr<Texture> texture2 = std::make_shared<Texture>();
-	std::string file1 = m_TexturePath + "button_play.tga";
-	texture2->Init(file1.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture2);
+	//std::shared_ptr<Texture> texture2 = std::make_shared<Texture>();
+	//std::string file1 = m_TexturePath + "button_play.tga";
+	//texture2->Init(file1.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	auto texture1 = GetTextureManager()->getTexture(1);
+	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture1);
 	button->Set2DPosition(screenWidth / 2, 400);
 	button->SetSize(200, 50);
 	button->SetOnClick([]() {
@@ -75,10 +102,11 @@ GLint Init(ESContext* esContext)
 	m_listButton.push_back(button);
 
 	//exit button
-	std::shared_ptr<Texture> texture3 = std::make_shared<Texture>();
+	/*std::shared_ptr<Texture> texture3 = std::make_shared<Texture>();
 	std::string file2 = m_TexturePath + "button_quit.tga";
-	texture3->Init(file2.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	button = std::make_shared<GameButton>(model, shader, texture3);
+	texture3->Init(file2.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);*/
+	auto texture2 = GetTextureManager()->getTexture(2);
+	button = std::make_shared<GameButton>(model, shader, texture2);
 	button->Set2DPosition(screenWidth / 2, 500);
 	button->SetSize(200, 50);
 	button->SetOnClick([]() {
@@ -88,16 +116,17 @@ GLint Init(ESContext* esContext)
 
 
 	//text game title
-	std::shared_ptr<Shaders>  shader1;
+	/*std::shared_ptr<Shaders>  shader1;
 	shader1 = std::make_shared<Shaders>();
 	std::string vs1 = m_ShaderPath + "TextShader.vs";
 	std::string fs1 = m_ShaderPath + "TextShader.fs";
-	shader1->Init(vs1, fs1);
+	shader1->Init(vs1, fs1);*/
 	//font
 	std::string path1 = m_FontPath + "arialbd.ttf";
 	std::shared_ptr<Font> font = std::make_shared<Font>(path1);
 
 	std::string Text_str = "SAMPLE NAME";
+	auto shader1 = GetShaderManager()->getShader(1);
 	m_Text_gameName = std::make_shared< Text>(shader1, font, Text_str, TEXT_COLOR::GREEN, 1.0);
 	m_Text_gameName->Set2DPosition(Vector2(screenWidth / 2 - 80, 300));
 
