@@ -123,7 +123,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Include\AMD;$(SolutionDir)\freetype\include;$(SolutionDir)\Utilities\src;$(projectdir)\src\Object;$(projectdir)\src;$(SolutionDir)\Soloud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Include\AMD;$(SolutionDir)\freetype\include;$(SolutionDir)\Utilities\src;$(projectdir)\src\Manager;$(projectdir)\src\State;$(projectdir)\src\Object;$(projectdir)\src;$(SolutionDir)\Soloud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -263,6 +263,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ShooterGame.cpp" />
+    <ClCompile Include="src\Manager\ModelManager.cpp" />
+    <ClCompile Include="src\State\IntroState.cpp" />
+    <ClCompile Include="src\Manager\ResourceManager.cpp" />
+    <ClCompile Include="src\State\MainContext.cpp" />
+    <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Manager\ShaderManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Object\Camera.cpp" />
     <ClCompile Include="src\Object\ExplosiveEffect.cpp" />
@@ -274,9 +281,19 @@
     <ClCompile Include="src\Object\SpriteSheet.cpp" />
     <ClCompile Include="src\Object\Text.cpp" />
     <ClCompile Include="src\Object\Texture.cpp" />
+    <ClCompile Include="src\Manager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ShooterGame.h" />
+    <ClInclude Include="src\Manager\ModelManager.h" />
+    <ClInclude Include="src\State\IntroState.h" />
+    <ClInclude Include="src\Manager\ManagerUtil.h" />
+    <ClInclude Include="src\Manager\ResourceManager.h" />
+    <ClInclude Include="src\State\MainContext.h" />
+    <ClInclude Include="src\Manager\FontManager.h" />
+    <ClInclude Include="src\Manager\ShaderManager.h" />
     <ClInclude Include="src\GameConfig.h" />
+    <ClInclude Include="src\Manager\Singleton.h" />
     <ClInclude Include="src\Object\BaseObject.h" />
     <ClInclude Include="src\Object\Camera.h" />
     <ClInclude Include="src\Object\ExplosiveEffect.h" />
@@ -288,6 +305,8 @@
     <ClInclude Include="src\Object\SpriteSheet.h" />
     <ClInclude Include="src\Object\Text.h" />
     <ClInclude Include="src\Object\Texture.h" />
+    <ClInclude Include="src\Manager\TextureManager.h" />
+    <ClInclude Include="src\State\GameBaseState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

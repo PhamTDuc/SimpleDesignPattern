@@ -1,7 +1,6 @@
 #pragma once
-#include "Singleton.h"
 #include "Texture.h"
-class TextureManager: public Singleton<TextureManager>
+class TextureManager
 {
 public:
 	explicit TextureManager(){}
@@ -13,5 +12,3 @@ private:
 	std::vector<std::shared_ptr<Texture>> m_textures;
 	std::string m_path;
 };
-
-extern TextureManager* GetTextureManager();

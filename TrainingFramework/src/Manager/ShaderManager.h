@@ -1,9 +1,7 @@
 #pragma once
-
 #include "Shaders.h"
-#include "Singleton.h"
 
-class ShaderManager: public Singleton<ShaderManager>
+class ShaderManager
 {
 public:
 	explicit ShaderManager(){}
@@ -15,5 +13,3 @@ private:
 	std::vector<std::shared_ptr<Shaders>> m_shaders;
 	std::string m_path;
 };
-
-extern ShaderManager* GetShaderManager();

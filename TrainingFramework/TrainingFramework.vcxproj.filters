@@ -7,6 +7,12 @@
     <Filter Include="src\Object">
       <UniqueIdentifier>{41cfa1cf-2a0a-46b4-859d-7391b1b6661e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Manager">
+      <UniqueIdentifier>{55d1a863-be75-41ad-ba35-4f0bc949f5a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\State">
+      <UniqueIdentifier>{c4c081f8-8d3a-4ae0-91e3-3e00076ce5a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -42,6 +48,22 @@
     <ClCompile Include="src\Object\Texture.cpp">
       <Filter>src\Object</Filter>
     </ClCompile>
+    <ClCompile Include="src\Manager\ShaderManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\TextureManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\FontManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\State\MainContext.cpp">
+      <Filter>src\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\State\IntroState.cpp" />
+    <ClCompile Include="src\Manager\ModelManager.cpp" />
+    <ClCompile Include="src\Manager\ResourceManager.cpp" />
+    <ClCompile Include="src\ShooterGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameConfig.h">
@@ -80,5 +102,30 @@
     <ClInclude Include="src\Object\Texture.h">
       <Filter>src\Object</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\ShaderManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\TextureManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Singleton.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\FontManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\GameBaseState.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\MainContext.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\ManagerUtil.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\IntroState.h" />
+    <ClInclude Include="src\Manager\ModelManager.h" />
+    <ClInclude Include="src\Manager\ResourceManager.h" />
+    <ClInclude Include="src\ShooterGame.h" />
   </ItemGroup>
 </Project>

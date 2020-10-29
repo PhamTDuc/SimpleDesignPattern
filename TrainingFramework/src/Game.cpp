@@ -10,18 +10,9 @@
 #include "Models.h"
 #include "Font.h"
 
-#include "ShaderManager.h"
-#include "TextureManager.h"
-
-ShaderManager* GetShaderManager()
-{
-	return ShaderManager::GetInstance();
-}
-
-TextureManager* GetTextureManager()
-{
-	return TextureManager::GetInstance();
-}
+#include "ManagerUtil.h"
+#include "ResourceManager.h"
+#include "ShooterGame.h"
 
 int screenWidth = 480;
 int screenHeight = 800;
@@ -52,20 +43,26 @@ GLint Init(ESContext* esContext)
 	m_ModelsPath = dataPath + "Model\\";
 	m_FontPath = dataPath + "fonts\\";
 
+	ResourceManager::Init();
 	// Shader Manager
-	GetShaderManager()->setPath(m_ShaderPath);
-	GetShaderManager()->addShader("TextureShader.vs", "TextureShader.fs");
-	GetShaderManager()->addShader("TextShader.vs", "TextShader.fs");
+	// GetShaderManager()->setPath(m_ShaderPath);
+	// GetShaderManager()->addShader("TextureShader.vs", "TextureShader.fs");
+	// GetShaderManager()->addShader("TextShader.vs", "TextShader.fs");
 
 	// Texture Manager
-	GetTextureManager()->setPath(m_TexturePath);
-	GetTextureManager()->addTexture("bg_main_menu.tga");
-	GetTextureManager()->addTexture("button_play.tga");
-	GetTextureManager()->addTexture("button_quit.tga");
+	// GetTextureManager()->setPath(m_TexturePath);
+	// GetTextureManager()->addTexture("bg_main_menu.tga");
+	// GetTextureManager()->addTexture("button_play.tga");
+	// GetTextureManager()->addTexture("button_quit.tga");
+	// GetTextureManager()->addTexture("Player.tga");
+
+	// Font Manager
+	// GetFontManager()->setPath(m_FontPath);
+	// GetFontManager()->addFont("arialbd.ttf");
 
 	//model
-	std::string path = m_ModelsPath + "Sprite2D.nfg";
-	std::shared_ptr<Models> model = std::make_shared<Models>(path, NFG);
+	// std::string path = m_ModelsPath + "Sprite2D.nfg";
+	// std::shared_ptr<Models> model = std::make_shared<Models>(path, NFG);
 
 	//texture
 	/*std::shared_ptr<Texture> texture1 = std::make_shared<Texture>();
@@ -83,6 +80,7 @@ GLint Init(ESContext* esContext)
 	//BackGround
 	auto shader = GetShaderManager()->getShader(0);
 	auto texture = GetTextureManager()->getTexture(0);
+	auto model = GetModelManager()->getModel(0);
 	m_BackGround = std::make_shared<Sprite2D>(model, shader, texture);
 	m_BackGround->Set2DPosition(screenWidth / 2, screenHeight / 2);
 	m_BackGround->SetSize(screenWidth, screenHeight);
@@ -122,8 +120,9 @@ GLint Init(ESContext* esContext)
 	std::string fs1 = m_ShaderPath + "TextShader.fs";
 	shader1->Init(vs1, fs1);*/
 	//font
-	std::string path1 = m_FontPath + "arialbd.ttf";
-	std::shared_ptr<Font> font = std::make_shared<Font>(path1);
+	/*std::string path1 = m_FontPath + "arialbd.ttf";
+	std::shared_ptr<Font> font = std::make_shared<Font>(path1);*/
+	auto font = GetFontManager()->getFont(0);
 
 	std::string Text_str = "SAMPLE NAME";
 	auto shader1 = GetShaderManager()->getShader(1);
@@ -134,11 +133,12 @@ GLint Init(ESContext* esContext)
 
 
 	// sample player
-	std::shared_ptr<Texture> texture5 = std::make_shared<Texture>();
+	/*std::shared_ptr<Texture> texture5 = std::make_shared<Texture>();
 	std::string file4 = m_TexturePath + "Player.tga";
-	texture5->Init(file4.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	texture5->Init(file4.c_str(), GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);*/
 
-	m_Player = std::make_shared<Sprite2D >(model, shader, texture5);
+	auto texture3 = GetTextureManager()->getTexture(3);
+	m_Player = std::make_shared<Sprite2D >(model, shader, texture3);
 	m_Player->Set2DPosition(screenWidth / 2, screenHeight - 100);
 	m_Player->SetSize(50, 50);
 	return 0;
@@ -202,22 +202,23 @@ void CleanUp()
 GLint _tmain(GLint argc, _TCHAR* argv[])
 {
 
-	ESContext esContext;
-	esInitContext(&esContext);
-	esCreateWindow(&esContext, "Demo Game", screenWidth, screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	if (Init(&esContext) != 0)
-		return 0;
+	//ESContext esContext;
+	//esInitContext(&esContext);
+	//esCreateWindow(&esContext, "Demo Game", screenWidth, screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 
-	esRegisterDrawFunc(&esContext, Draw);
-	esRegisterUpdateFunc(&esContext, Update);
-	esRegisterKeyFunc(&esContext, Key);
-	esRegisterMouseFunc(&esContext, Mouse);
-	esRegisterMousePositionFunc(&esContext, MousePos);
-	esMainLoop(&esContext);
+	//if (Init(&esContext) != 0)
+	//	return 0;
 
-	//releasing OpenGL resources
-	CleanUp();
+	//esRegisterDrawFunc(&esContext, Draw);
+	//esRegisterUpdateFunc(&esContext, Update);
+	//esRegisterKeyFunc(&esContext, Key);
+	//esRegisterMouseFunc(&esContext, Mouse);
+	//esRegisterMousePositionFunc(&esContext, MousePos);
+	//esMainLoop(&esContext);
 
+	////releasing OpenGL resources
+	//CleanUp();
+	ShooterGame::Run();
 	//identifying memory leaks
 	//MemoryDump();
 	//printf("Press any key...\n");
