@@ -1,9 +1,11 @@
 #include "ShooterGame.h"
 #include "IntroState.h"
+#include "Bullet.h"
 
 MainContext ShooterGame::s_mainContext = MainContext(new IntroState());
 ResourceManager ShooterGame::s_resourceManager = ResourceManager();
 
+MainContext& GetMainContext() { return ShooterGame::getMainContext(); }
 void ShooterGame::Draw(ESContext* esContext)
 {
 	s_mainContext.Draw(esContext);
@@ -21,6 +23,7 @@ void ShooterGame::Key(ESContext* esContext, unsigned char key, bool bbIsPressede
 
 void ShooterGame::Mouse(ESContext* esContext, GLint x, GLint y, bool bbIsPresseded)
 {
+	
 	s_mainContext.Mouse(esContext, x, y, bbIsPresseded);
 }
 
@@ -37,6 +40,9 @@ GLint ShooterGame::Run()
 
 	s_resourceManager.Init();
 
+	// Initialize Remaining Static Object
+	Bullet::Init();
+
 	if (s_mainContext.Init(&esContext) !=0)
 		return 0;
 
@@ -46,4 +52,6 @@ GLint ShooterGame::Run()
 	esRegisterMouseFunc(&esContext, ShooterGame::Mouse);
 	esRegisterMousePositionFunc(&esContext, ShooterGame::MousePos);
 	esMainLoop(&esContext);
+
+	return 0;
 }

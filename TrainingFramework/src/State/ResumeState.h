@@ -1,8 +1,7 @@
 #pragma once
 #include "GameBaseState.h"
-#include "MainContext.h"
 #include "GameButton.h"
-class IntroState :    public GameBaseState
+class ResumeState : public GameBaseState
 {
 private:
     std::shared_ptr<Sprite2D> m_backGround;

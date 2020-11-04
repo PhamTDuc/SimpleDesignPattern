@@ -123,7 +123,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Include\AMD;$(SolutionDir)\freetype\include;$(SolutionDir)\Utilities\src;$(projectdir)\src\Manager;$(projectdir)\src\State;$(projectdir)\src\Object;$(projectdir)\src;$(SolutionDir)\Soloud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\Collsion;$(ProjectDir)\src\Prototype;$(SolutionDir)\Include\AMD;$(SolutionDir)\freetype\include;$(SolutionDir)\Utilities\src;$(projectdir)\src\Manager;$(projectdir)\src\State;$(projectdir)\src\Object;$(projectdir)\src;$(SolutionDir)\Soloud\include;$(projectdir)\src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -263,6 +263,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\State\GameOverState.cpp" />
+    <ClCompile Include="src\Collsion\CollisionChecker.cpp" />
+    <ClCompile Include="src\Prototype\Bullet.cpp" />
+    <ClCompile Include="src\Prototype\Enemy.cpp" />
+    <ClCompile Include="src\State\ResumeState.cpp" />
+    <ClCompile Include="src\State\GamePlayState.cpp" />
     <ClCompile Include="src\ShooterGame.cpp" />
     <ClCompile Include="src\Manager\ModelManager.cpp" />
     <ClCompile Include="src\State\IntroState.cpp" />
@@ -282,8 +288,15 @@
     <ClCompile Include="src\Object\Text.cpp" />
     <ClCompile Include="src\Object\Texture.cpp" />
     <ClCompile Include="src\Manager\TextureManager.cpp" />
+    <ClCompile Include="src\Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\State\GameOverState.h" />
+    <ClInclude Include="src\Collsion\CollisionChecker.h" />
+    <ClInclude Include="src\Prototype\Bullet.h" />
+    <ClInclude Include="src\Prototype\Enemy.h" />
+    <ClInclude Include="src\State\ResumeState.h" />
+    <ClInclude Include="src\State\GamePlayState.h" />
     <ClInclude Include="src\ShooterGame.h" />
     <ClInclude Include="src\Manager\ModelManager.h" />
     <ClInclude Include="src\State\IntroState.h" />
@@ -307,6 +320,7 @@
     <ClInclude Include="src\Object\Texture.h" />
     <ClInclude Include="src\Manager\TextureManager.h" />
     <ClInclude Include="src\State\GameBaseState.h" />
+    <ClInclude Include="src\Utils\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

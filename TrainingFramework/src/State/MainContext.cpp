@@ -1,4 +1,5 @@
 #include "MainContext.h"
+#include "Bullet.h"
 
 MainContext::MainContext(GameBaseState* state)
 {
@@ -7,41 +8,55 @@ MainContext::MainContext(GameBaseState* state)
 
 void MainContext::changeState(GameBaseState* state)
 {
-	if (m_state) delete m_state;
-	m_state = state;
-	if (m_state) m_state->setContext(this);
+	if (state) m_states.push(state);
+}
+
+void MainContext::popState()
+{
+	if (m_states.size() > 1)
+		m_states.pop();
 }
 
 GLint MainContext::Init(ESContext* esContext)
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-	if (m_state) m_state->Init();
+
+	auto state = m_states.top();
+	if (state) state->Init();
 	return 0;
 }
 
 void MainContext::Draw(ESContext* esContext)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (m_state) m_state->Draw();
+	auto state = m_states.top();
+	if (state) state->Draw();
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 }
 
 void MainContext::Update(ESContext* esContext, GLfloat deltatime)
 {
-	if (m_state) m_state->Update(deltatime);
+	auto state = m_states.top();
+	if (state) state->Update(deltatime);
 }
 
 void MainContext::Key(ESContext*, unsigned char key, bool bbIsPressed)
 {
-	if (m_state) m_state->Key(key, bbIsPressed);
+	auto state = m_states.top();
+	if (state) state->Key(key, bbIsPressed);
 }
 
 void MainContext::Mouse(ESContext*, GLint x, GLint y, bool bbIsPressed)
 {
-	if (m_state) m_state->Mouse(x, y, bbIsPressed);
+	if (!bbIsPressed)
+	{
+		auto state = m_states.top();
+		if (state) state->Mouse(x, y, bbIsPressed);
+	}
 }
 
 void MainContext::MousePos(ESContext*, GLint x, GLint y)
 {
-	if (m_state) m_state->MousePos(x, y);
+	auto state = m_states.top();
+	if (state) state->MousePos(x, y);
 }

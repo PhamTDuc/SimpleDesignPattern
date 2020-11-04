@@ -1,13 +1,16 @@
 #pragma once
 #include "GameBaseState.h"
+#include <stack>
+extern MainContext& GetMainContext();
 class MainContext
 {
 private:
-	GameBaseState* m_state;
+	std::stack<GameBaseState*> m_states;
 public:
 	MainContext(GameBaseState*);
 	void changeState(GameBaseState* state);
-	~MainContext() { delete m_state; }
+	void popState();
+	~MainContext() { while (!m_states.empty()) { m_states.pop(); } }
 	GLint Init(ESContext*);
 	void Draw(ESContext*);
 	void Update(ESContext*, GLfloat);

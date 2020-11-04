@@ -1,7 +1,7 @@
-#include "IntroState.h"
+#include "GameOverState.h"
 #include "GamePlayState.h"
 
-GLint IntroState::Init()
+GLint GameOverState::Init()
 {
     // Initialize Background
     auto shader = GetShaderManager().getShader(0);
@@ -17,12 +17,13 @@ GLint IntroState::Init()
     button = std::make_shared<GameButton>(model, shader, texture);
     button->Set2DPosition(screenWidth / 2, 400);
     button->SetSize(200, 50);
-    button->SetOnClick([]() {
-        auto state = new GamePlayState(20); 
-        state->Init();
-        GetMainContext().changeState(state);
-        
-        });
+    button->SetOnClick([]() 
+    {
+            GetMainContext().popState();
+            auto state = new GamePlayState(20);
+            state->Init();
+            GetMainContext().changeState(state);
+    });
     m_listButtons.push_back(button);
 
     texture = GetTextureManager().getTexture(4);
@@ -31,33 +32,35 @@ GLint IntroState::Init()
     button->SetSize(200, 50);
     button->SetOnClick([]() {
         exit(0);
-    });
+        });
     m_listButtons.push_back(button);
+
+    auto font = GetFontManager().getFont(0);
+    shader = GetShaderManager().getShader(1);
+    m_displayScore = std::make_shared<Text>(shader, font, "Your Score:" + std::to_string(m_score) , TEXT_COLOR::CYAN, 1.5);
+    m_displayScore->Set2DPosition(Vector2(screenWidth/2 - 140, screenHeight/2 - 40));
 
     return 0;
 }
 
-void IntroState::Draw()
+void GameOverState::Draw()
 {
     m_backGround->Draw();
     for (auto& btn : m_listButtons)
         btn->Draw();
+    m_displayScore->Draw();
 }
 
-void IntroState::Update(GLfloat deltatime)
+void GameOverState::Update(GLfloat deltatime)
 {
     m_backGround->Update(deltatime);
     for (auto& btn : m_listButtons)
         btn->Update(deltatime);
 }
 
-void IntroState::Key(unsigned char key, bool bbIsPressed)
-{
-    if (key == KEY_BACK)
-        exit(0);
-}
+void GameOverState::Key(unsigned char key, bool bbIsPressed){}
 
-void IntroState::Mouse(GLint x, GLint y, bool bbIsPressed)
+void GameOverState::Mouse(GLint x, GLint y, bool bbIsPressed)
 {
     for (auto it : m_listButtons)
     {

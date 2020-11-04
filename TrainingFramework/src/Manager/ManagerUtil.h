@@ -6,7 +6,7 @@
 
 extern int screenWidth;
 extern int screenHeight;
-extern ShaderManager* GetShaderManager();
-extern TextureManager* GetTextureManager();
-extern FontManager* GetFontManager();
-extern ModelManager* GetModelManager();
+extern ShaderManager& GetShaderManager();
+extern TextureManager& GetTextureManager();
+extern FontManager& GetFontManager();
+extern ModelManager& GetModelManager();

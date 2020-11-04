@@ -14,7 +14,7 @@ private:
 	static void MousePos(ESContext* esContext, GLint x, GLint y);
 public:
 	static GLint Run();
-	//static MainContext& getMainContext() { return s_mainContext; }
+	static MainContext& getMainContext() { return s_mainContext; }
 	//static ResourceManager& getResouceManager() { return s_resourceManager; }
 };
 

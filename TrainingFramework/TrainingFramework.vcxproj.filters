@@ -13,6 +13,15 @@
     <Filter Include="src\State">
       <UniqueIdentifier>{c4c081f8-8d3a-4ae0-91e3-3e00076ce5a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Prototype">
+      <UniqueIdentifier>{284ecfdf-2d23-4862-8185-08409b2593df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Collision">
+      <UniqueIdentifier>{dad80510-2bdf-4285-a735-3aaa8301ffd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{23c8179f-3431-47f5-9f2d-3cf758d64931}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -60,10 +69,39 @@
     <ClCompile Include="src\State\MainContext.cpp">
       <Filter>src\State</Filter>
     </ClCompile>
-    <ClCompile Include="src\State\IntroState.cpp" />
-    <ClCompile Include="src\Manager\ModelManager.cpp" />
-    <ClCompile Include="src\Manager\ResourceManager.cpp" />
-    <ClCompile Include="src\ShooterGame.cpp" />
+    <ClCompile Include="src\State\GamePlayState.cpp">
+      <Filter>src\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\State\IntroState.cpp">
+      <Filter>src\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\ModelManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\ResourceManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\State\ResumeState.cpp">
+      <Filter>src\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShooterGame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Prototype\Bullet.cpp">
+      <Filter>src\Prototype</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Prototype\Enemy.cpp">
+      <Filter>src\Prototype</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collsion\CollisionChecker.cpp">
+      <Filter>src\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Utils.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\State\GameOverState.cpp">
+      <Filter>src\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameConfig.h">
@@ -123,9 +161,38 @@
     <ClInclude Include="src\Manager\ManagerUtil.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="src\State\IntroState.h" />
-    <ClInclude Include="src\Manager\ModelManager.h" />
-    <ClInclude Include="src\Manager\ResourceManager.h" />
-    <ClInclude Include="src\ShooterGame.h" />
+    <ClInclude Include="src\State\GamePlayState.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\IntroState.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\ModelManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\ResourceManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\ResumeState.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShooterGame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Prototype\Bullet.h">
+      <Filter>src\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Prototype\Enemy.h">
+      <Filter>src\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collsion\CollisionChecker.h">
+      <Filter>src\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\Utils.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State\GameOverState.h">
+      <Filter>src\State</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

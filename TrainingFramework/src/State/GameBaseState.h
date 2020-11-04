@@ -7,13 +7,13 @@ class MainContext;
 class GameBaseState
 {
 protected:
-    MainContext* m_context;
+    //MainContext* m_context;
 public:
-    void setContext(MainContext* context)
+    /*void setContext(MainContext* context)
     {
         this->m_context = context;
-    }
-    MainContext* getContext() { return m_context; }
+    }*/
+    //MainContext* getContext() { return m_context; }
     virtual ~GameBaseState() {}
     virtual GLint Init() = 0;
     virtual void Draw() = 0;
